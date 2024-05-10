@@ -1,0 +1,318 @@
+{% extends 'ecom/layout_header.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load humanize %}
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Fashi Template">
+<meta name="keywords" content="Fashi, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Trang chủ</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+{% block content %}
+<style>
+    .product-item .pi-pic img {
+    width: 100%; /* Chiều rộng tối đa của ảnh so với thẻ bao quanh nó */
+    height: 300px; /* Chiều cao cố định cho tất cả ảnh */
+    object-fit: cover; /* Đảm bảo ảnh phủ kín không gian mà không bị méo */
+}
+</style>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Home</a>
+                    <span>Shop</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+
+<!-- Product Shop Section Begin -->
+<section class="product-shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                <form method="get" id="categoryFilterForm" class="filter-widget">
+                    <h4 class="fw-title">Thể loại</h4>
+                    <div class="fw-brand-check">
+                        {% for category in categories %}
+                        <div class="bc-item">
+                            <label>
+                                <input type="checkbox" name="category" value="{{ category.category }}" class="category-checkbox" {% if category.category == selected_category %}checked{% endif %}>
+                                <span class="checkmark"></span>
+                                {{ category.category }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                    
+                
+                <div class="filter-widget">
+                    <h4 class="fw-title">Giới tính</h4>
+                    <form method="get" id="filterForm" style="display: flex; align-items: center;">
+                        <div class="bc-item" style="margin-right: 10px;">
+                            <label style="display: flex; align-items: center;">
+                                <input type="checkbox" name="gender" value="Male" {% if 'Nam' in selected_genders %}checked{% endif %}>
+                                <span style="margin-left: 5px;">Nam</span>
+                            </label>
+                        </div>
+                        <div class="bc-item">
+                            <label style="display: flex; align-items: center;">
+                                <input type="checkbox" name="gender" value="Female" {% if 'Nữ' in selected_genders %}checked{% endif %}>
+                                <span style="margin-left: 5px;">Nữ</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Tags</h4>
+                    <div class="fw-tags">
+                        <a href="#">Towel</a>
+                        <a href="#">Shoes</a>
+                        <a href="#">Coat</a>
+                        <a href="#">Dresses</a>
+                        <a href="#">Trousers</a>
+                        <a href="#">Men's hats</a>
+                        <a href="#">Backpack</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="product-show-option">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7">
+                            <div class="select-option">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 text-right">
+                            <p>Show 01- 09 Of 36 Product</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="row">
+                        {% for product in products %}
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <img src="{% static product.product_image.url %}" alt="{{ product.name }}">
+                                    {% if product.sale %}
+                                    <div class="sale pp-sale">Sale</div>
+                                    {% endif %}
+                                    <div class="icon">
+                                        <i class="icon_heart_alt"></i>
+                                    </div>
+                                </div>
+                                <div class="pi-text">
+                                    <div class="catagory-name">{{ product.category }}</div>
+                                    <a href="{% url 'product-detail' product.id %}">
+                                        <h5>{{ product.name }}</h5>
+                                    </a>
+                                    <div class="product-price">
+                                        {{ product.price|intcomma }} VNĐ
+                                        {% if product.original_price %}
+                                        <span>${{ product.original_price }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>        
+                <div class="loading-more">
+                    {% if products.has_other_pages %}
+                        {% if products.has_previous %}
+                            <a href="?page=1">First</a>
+                            <a href="?page={{ products.previous_page_number }}">Previous</a>
+                        {% endif %}
+                        
+                        <span>Page {{ products.number }} of {{ products.paginator.num_pages }}.</span>
+                        
+                        {% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}">Next</a>
+                            <a href="?page={{ products.paginator.num_pages }}">Last</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Shop Section End -->
+
+<!-- Partner Logo Section Begin -->
+<div class="partner-logo">
+    <div class="container">
+        <div class="logo-carousel owl-carousel">
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-1.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-2.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-3.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-4.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-5.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Partner Logo Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                    </div>
+                    <ul>
+                        <li>Address: 60-49 Road 11378 New York</li>
+                        <li>Phone: +65 11.188.888</li>
+                        <li>Email: test@gmail.com</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1">
+                <div class="footer-widget">
+                    <h5>Information</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Serivius</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="footer-widget">
+                    <h5>My Account</h5>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                        <li><a href="#">Shop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="newslatter-item">
+                    <h5>Join Our Newsletter Now</h5>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
+                    <form action="#" class="subscribe-form">
+                        <input type="text" placeholder="Enter Your Mail">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-reserved">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="payment-pic">
+                        <img src="img/payment-method.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+<script src="{% static 'js/jquery.dd.min.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+    document.querySelectorAll('.category-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            if(this.checked) {
+                // Redirect based on the selected category
+                window.location.href = '?category=' + this.value;
+            } else {
+                // If the checkbox is unchecked, remove the category parameter to load all products
+                window.location.href = window.location.pathname;
+            }
+        });
+    });
+</script>
+<script>
+    document.querySelectorAll('#filterForm input').forEach(input => {
+        input.addEventListener('change', () => {
+            document.getElementById('filterForm').submit();
+        });
+    });
+    document.querySelectorAll('input[name="gender"]').forEach(input => {
+    input.addEventListener('change', () => {
+        const formData = new FormData(document.getElementById('filterForm'));
+        
+        // Sử dụng AJAX để gửi yêu cầu
+        fetch('/product_list', {
+            method: 'POST', // Hoặc 'GET', tùy vào API của bạn
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Cập nhật giao diện người dùng dựa trên dữ liệu trả về
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+document.getElementById('filterForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn việc gửi form
+});
+
+</script>
+{% endblock %}

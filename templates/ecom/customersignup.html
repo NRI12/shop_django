@@ -1,0 +1,180 @@
+{% extends 'ecom/layout_header.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Home</a>
+                    <span>Đăng kí</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Form Section Begin -->
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="register-form">
+                    <h2>Đăng kí</h2>
+                    <form action="#" method="post" enctype="multipart/form-data" > 
+                        {% csrf_token %}
+                        <div class="group-input">
+                            {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field userForm.username class="form-control" placeholder="Username" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field userForm.password class="form-control" placeholder="Password" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field customerForm.address class="form-control" placeholder="Address" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field customerForm.mobile class="form-control" placeholder="Contact" %}
+                        </div>
+                        <div class="group-input">
+                            {% render_field customerForm.profile_pic class="form-control" placeholder="Profile pic" %}
+                        </div>
+                        <button type="submit" class="site-btn register-btn">Đăng kí</button>
+                    </form>
+                    <div class="switch-login">
+                        <a href="./customerlogin" class="or-login">Or Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register Form Section End -->
+
+<!-- Partner Logo Section Begin -->
+<div class="partner-logo">
+    <div class="container">
+        <div class="logo-carousel owl-carousel">
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-1.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-2.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-3.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-4.png" alt="">
+                </div>
+            </div>
+            <div class="logo-item">
+                <div class="tablecell-inner">
+                    <img src="img/logo-carousel/logo-5.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Partner Logo Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                    </div>
+                    <ul>
+                        <li>Address: 60-49 Road 11378 New York</li>
+                        <li>Phone: +65 11.188.888</li>
+                        <li>Email: hello.colorlib@gmail.com</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1">
+                <div class="footer-widget">
+                    <h5>Information</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Serivius</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="footer-widget">
+                    <h5>My Account</h5>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                        <li><a href="#">Shop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="newslatter-item">
+                    <h5>Join Our Newsletter Now</h5>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
+                    <form action="#" class="subscribe-form">
+                        <input type="text" placeholder="Enter Your Mail">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+<script src="{% static 'js/jquery.dd.min.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'ecom/layout_header.html' %}
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+    .profile-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        margin: 20px auto;
+        overflow: hidden;
+        padding: 20px;
+        width: 70%;
+    }
+    .profile-img img {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+    }
+    .profile-info {
+        margin-left: 20px;
+    }
+    .profile-info h3 {
+        margin-top: 0;
+    }
+    .profile-info p {
+        margin-bottom: 10px;
+    }
+    .edit-profile-btn {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    .edit-profile-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="profile-card d-flex">
+                <div class="col-sm-2 col-md-2">
+                    <img src="{% static customer.profile_pic.url %}"   alt="profile pic" class="img-rounded img-responsive" />
+                </div>
+                <div class="profile-info">
+                    <h3>{{ request.user.get_full_name }}</h3>
+                    <p><strong>Email:</strong> {{ request.user.email }}</p>
+                    <p><strong>Address:</strong> {{ customer.address }}</p>
+                    <p><strong>Contact:</strong> {{ customer.mobile }}</p>
+                    <a href="{% url 'edit-profile' %}" class="edit-profile-btn">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

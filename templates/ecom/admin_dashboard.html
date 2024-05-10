@@ -1,0 +1,97 @@
+{% extends 'ecom/admin_base.html' %}
+{% load static %}
+{% block content %}
+<br>
+{%include 'ecom/admin_dashboard_cards.html'%}
+<br><br><br><br><br>
+<style>
+  .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.panel-heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.label {
+  display: inline-block;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.label-info { background-color: #5bc0de; }
+.label-success { background-color: #5cb85c; }
+.label-warning { background-color: #f0ad4e; }
+.label-primary { background-color: #337ab7; }
+
+</style>
+<hr><hr>
+<div class="container" >
+
+    <div class="panel panel-danger" >
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">Recent Booking</h6>
+      </div>
+      <table class="table table-hover table-bordered" id="dev-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Contact</th>
+            <th>Shipment Address</th>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Status</th>
+
+          </tr>
+        </thead>
+        {% for product,customer,order in data %}
+        <tr>
+          {% for c in customer %}
+          <td> {{c.get_name}}</td>
+          <td>{{c.mobile}}</td>
+          <td>{{order.address}}</td>
+
+          {% endfor %}
+          {% for p in product %}
+          <td> {{p.name}}</td>
+          <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+
+          {% if order.status == 'Pending'%}
+          <td> <span class="label label-info">{{order.status}}</span></td>
+          {% elif order.status == 'Delivered' %}
+          <td> <span class="label label-success">{{order.status}}</span></td>
+          {% elif order.status == 'Out for Delivery' %}
+          <td> <span class="label label-warning">{{order.status}}</span></td>
+          {%else%}
+            <td> <span class="label label-primary">{{order.status}}</span></td>
+          {%endif%}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+
+  </div>
+</div>
+
+
+{% endblock content %}

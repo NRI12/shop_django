@@ -1,0 +1,57 @@
+{% extends 'ecom/layout_header.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">Edit Profile</div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="id_first_name">First Name</label>
+                {% render_field userForm.first_name class="form-control" placeholder="First Name" id="id_first_name" %}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="id_last_name">Last Name</label>
+                {% render_field userForm.last_name class="form-control" placeholder="Last Name" id="id_last_name" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="id_username">Username</label>
+                {% render_field userForm.username class="form-control" placeholder="Username" id="id_username" %}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="id_password">Password</label>
+                {% render_field userForm.password class="form-control" placeholder="Password" id="id_password" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="id_mobile">Mobile</label>
+                {% render_field customerForm.mobile class="form-control" placeholder="Mobile" id="id_mobile" %}
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="id_address">Address</label>
+                {% render_field customerForm.address class="form-control" placeholder="Address" id="id_address" %}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="id_profile_pic">Profile Picture</label>
+                {% render_field customerForm.profile_pic class="form-control-file" id="id_profile_pic" %}
+              </div>
+            </div>
+            <button class="btn btn-success" type="submit">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
