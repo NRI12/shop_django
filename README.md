@@ -19,7 +19,7 @@ This project is an online store built using Django, a high-level Python web fram
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repository/online-store.git
+    git clone https://github.com/NRI12/django_shop.git
     ```
 2. Install required packages:
     ```bash
@@ -45,4 +45,3 @@ Navigate to `http://127.0.0.1:8000/` to start using the application. Register a 
 
 ## Contact
 For more information, please contact ctv55345@gmail.com.
-"""
